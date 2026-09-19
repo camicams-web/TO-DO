@@ -89,11 +89,19 @@ O desenvolvimento do projeto foi organizado nas seguintes etapas:
 9. **Responsividade:** adaptação da interface para telas menores, incluindo celulares e tablets.
 10. **Verificação final:** conferência da estrutura dos arquivos, funcionamento do JavaScript e coerência entre os recursos documentados e a aplicação.
 
-## MCPs e apoio ao desenvolvimento
+## MCPs e ferramentas utilizadas no desenvolvimento
 
 Durante o desenvolvimento assistido, foram utilizados recursos baseados em **MCP (Model Context Protocol)** para permitir que o agente trabalhasse de forma controlada no ambiente do projeto.
 
-Os MCPs e ferramentas de apoio foram utilizados para:
+### Recursos identificados
+
+- **MCP (Model Context Protocol):** comunicação controlada com o ambiente de desenvolvimento.
+- **Sequential Thinking:** organização do raciocínio e decomposição do trabalho em etapas.
+- **Page Agent:** apoio à interação e à verificação da interface no navegador.
+
+O **Zapier Webhooks** também foi utilizado no projeto, mas como integração da aplicação, e não como MCP.
+
+Esses recursos foram utilizados para:
 
 - Inspecionar os arquivos existentes no workspace.
 - Identificar a estrutura e os recursos já implementados no `index.html`.
