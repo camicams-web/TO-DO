@@ -184,6 +184,7 @@
 </head>
 <body>
   <main class="shell">
+    <p class="demo-warning" role="alert">Demonstração com IA externa. Utilize apenas dados fictícios.</p>
     <header class="topbar">
       <div class="brand"><div class="logo" aria-hidden="true">✓</div><div><h1>Clareza</h1><small>Seu espaço para organizar o dia</small></div></div>
       <div class="date" id="today"></div>
@@ -267,5 +268,9 @@
     $('#today').textContent = new Intl.DateTimeFormat('pt-BR', { weekday:'long', day:'numeric', month:'long' }).format(new Date());
     render(); updateZapierStatus(); renderThinking();
   </script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/page-agent@1.12.4/dist/iife/page-agent.demo.js"
+    crossorigin="anonymous"
+  ></script>
 </body>
 </html>
