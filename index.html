@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aplicação didática de lista de tarefas feita com HTML, CSS e JavaScript puro.">
+  <title>Clareza — Lista de tarefas</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root { --bg:#f3f8fd; --card:#fff; --ink:#102a43; --muted:#6b8299; --line:#dfebf5; --blue:#1769aa; --blue-dark:#0d4f87; --blue-deep:#0b2d4d; --blue-soft:#e6f2fc; --green:#15966a; --red:#d9485f; --shadow:0 22px 60px rgba(20,67,108,.10); }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color:var(--ink); background:radial-gradient(circle at 8% -10%,#dceefa 0,transparent 30rem),radial-gradient(circle at 100% 5%,#eaf5fd 0,transparent 22rem),var(--bg); }
+    button, input, select { font:inherit; }
+    button { cursor:pointer; }
+    .shell { width:min(1120px, calc(100% - 40px)); margin:0 auto; padding:34px 0 64px; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-bottom:36px; }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .logo { display:grid; place-items:center; width:46px; height:46px; border-radius:15px; color:#fff; background:linear-gradient(135deg,var(--blue),var(--blue-deep)); font-size:22px; box-shadow:0 10px 22px #1769aa3d; }
+    .brand h1 { margin:0; font-size:1.22rem; letter-spacing:-.04em; }
+    .brand small { color:var(--muted); }
+    .date { color:var(--muted); font-size:.86rem; font-weight:600; text-align:right; text-transform:capitalize; }
+    .hero { display:grid; grid-template-columns:1fr 290px; gap:24px; align-items:stretch; margin-bottom:24px; }
+    .intro, .progress-card, .panel { background:var(--card); border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow); }
+    .intro { padding:36px; display:grid; grid-template-columns:minmax(0,1fr) 240px; gap:28px; align-items:center; background:linear-gradient(135deg,#fff 0%,#f5faff 100%); overflow:hidden; }
+    .intro-art { min-height:220px; position:relative; overflow:hidden; border-radius:18px; background:#d9eafa; box-shadow:0 14px 30px rgba(20,67,108,.14); }
+    .intro-art::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 42%,rgba(8,38,66,.62)); pointer-events:none; }
+    .intro-art img { display:block; width:100%; height:100%; min-height:220px; object-fit:cover; transition:transform .5s ease; }
+    .intro-art:hover img { transform:scale(1.05); }
+    .art-label { position:absolute; z-index:1; right:13px; bottom:13px; left:13px; color:#fff; font-size:.76rem; font-weight:700; }
+    .pulse { display:inline-block; width:7px; height:7px; margin-right:6px; border-radius:50%; background:#84d8ff; box-shadow:0 0 0 4px #84d8ff35; }
+    .eyebrow { margin:0 0 9px; color:var(--blue); font-size:.76rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    .intro h2 { max-width:570px; margin:0; font-size:clamp(2rem,4vw,3.45rem); line-height:1.02; letter-spacing:-.075em; }
+    .intro p { max-width:600px; margin:18px 0 0; color:var(--muted); line-height:1.6; }
+    .progress-card { padding:26px; display:flex; flex-direction:column; justify-content:space-between; background:linear-gradient(160deg,#fff 20%,#f1f8fe); }
+    .progress-title { display:flex; justify-content:space-between; align-items:baseline; color:var(--muted); font-size:.9rem; }
+    .progress-title strong { color:var(--ink); font-size:1.8rem; }
+    .ring { width:144px; height:144px; margin:14px auto 4px; display:grid; place-items:center; border-radius:50%; background:conic-gradient(var(--blue) var(--progress,0%), #dcebf7 0); position:relative; box-shadow:0 10px 30px #1769aa1c; }
+    .ring::before { content:""; position:absolute; inset:11px; border-radius:50%; background:#fff; }
+    .ring span { position:relative; font-size:1.4rem; font-weight:800; }
+    .quote { margin:0; color:var(--muted); font-size:.84rem; line-height:1.5; text-align:center; }
+    .panel { padding:28px; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:22px; }
+    .input-wrap { flex:1 1 260px; position:relative; }
+    .input-wrap span { position:absolute; left:14px; top:11px; color:var(--muted); }
+    input[type="text"], select { width:100%; border:1px solid var(--line); border-radius:13px; background:#fafbfe; color:var(--ink); outline:none; padding:12px 14px; transition:.18s ease; }
+    .input-wrap input { padding-left:39px; }
+    input:focus, select:focus { border-color:var(--blue); box-shadow:0 0 0 3px #1769aa1c; }
+    .add-form { display:flex; gap:10px; margin-bottom:26px; }
+    .add-form input { flex:1; }
+    .task-options { display:grid; grid-template-columns:minmax(170px,1fr) 150px minmax(170px,1fr); gap:8px; width:100%; }
+    .task-options input { width:100%; }
+    .btn { border:0; border-radius:13px; padding:12px 17px; font-weight:750; transition:.18s ease; }
+    .btn:hover { transform:translateY(-1px); }
+    .btn-primary { color:#fff; background:linear-gradient(135deg,var(--blue),var(--blue-deep)); box-shadow:0 8px 18px #1769aa33; }
+    .btn-primary:hover { background:var(--blue-dark); }
+    .btn-ghost { color:var(--muted); background:#f3f5fa; }
+    .btn-ghost:hover { color:var(--ink); background:#e9edf5; }
+    .summary { display:flex; justify-content:space-between; align-items:center; padding-bottom:15px; border-bottom:1px solid var(--line); }
+    .summary h3 { margin:0; font-size:1rem; }
+    .count { color:var(--muted); font-size:.85rem; }
+    .task-list { display:grid; gap:10px; margin:16px 0 0; padding:0; list-style:none; }
+    .task { display:flex; align-items:center; gap:12px; padding:15px; border:1px solid var(--line); border-radius:16px; background:#fff; animation:appear .25s ease; transition:.18s ease; }
+    .task:hover { border-color:#b8d5ec; box-shadow:0 8px 22px rgba(20,67,108,.07); transform:translateY(-1px); }
+    .task.dragging { opacity:.45; border-style:dashed; transform:scale(.99); }
+    .task.drag-over { border-color:var(--blue); background:#f3f9ff; }
+    .drag-handle { flex:0 0 auto; color:#a8bdce; cursor:grab; font-size:1.3rem; line-height:1; letter-spacing:-4px; user-select:none; }
+    .drag-handle:active { cursor:grabbing; }
+    .check { flex:0 0 auto; width:22px; height:22px; border:2px solid #c7cede; border-radius:7px; appearance:none; position:relative; }
+    .check:checked { border-color:var(--green); background:var(--green); box-shadow:0 4px 10px #15966a30; }
+    .check:checked::after { content:"✓"; position:absolute; color:#fff; font-size:15px; font-weight:900; left:3px; top:-1px; }
+    .task-content { min-width:0; flex:1; }
+    .task-text { display:block; overflow-wrap:anywhere; line-height:1.35; }
+    .task.done .task-text { color:#9aa4b5; text-decoration:line-through; }
+    .task-meta { color:var(--muted); font-size:.75rem; margin-top:4px; }
+    .delete { border:0; color:#b2bac8; background:transparent; padding:6px; font-size:1.1rem; }
+    .delete:hover { color:var(--red); }
+    .empty { padding:42px 20px; text-align:center; color:var(--muted); }
+    .empty-icon { display:grid; place-items:center; width:52px; height:52px; margin:0 auto 12px; border-radius:16px; background:var(--blue-soft); color:var(--blue); font-size:1.5rem; }
+    .tip { margin:18px 0 0; color:var(--muted); font-size:.8rem; text-align:center; }
+    kbd { padding:2px 6px; border:1px solid var(--line); border-bottom-width:2px; border-radius:5px; background:#fff; font-size:.72rem; }
+    .zapier-card { margin-top:18px; padding:20px; border:1px solid #d8e7f5; border-radius:18px; background:linear-gradient(135deg,#f7fbff,#eef7ff); }
+    .zapier-head { display:flex; justify-content:space-between; gap:14px; align-items:flex-start; }
+    .zapier-title { display:flex; gap:10px; align-items:center; }
+    .zapier-mark { display:grid; place-items:center; width:34px; height:34px; border-radius:10px; color:#fff; background:#ff4f00; font-weight:900; }
+    .zapier-card h3 { margin:0; font-size:.95rem; }
+    .zapier-card p { margin:4px 0 0; color:var(--muted); font-size:.8rem; line-height:1.45; }
+    .zapier-status { display:inline-flex; align-items:center; gap:6px; padding:6px 9px; border-radius:999px; color:var(--muted); background:#fff; font-size:.72rem; font-weight:800; white-space:nowrap; }
+    .zapier-status::before { content:""; width:7px; height:7px; border-radius:50%; background:#c2ccd8; }
+    .zapier-status.connected { color:var(--green); }
+    .zapier-status.connected::before { background:var(--green); }
+    .zapier-config { display:flex; gap:8px; margin-top:14px; }
+    .zapier-config label { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+    .zapier-help { margin-top:12px; color:var(--muted); font-size:.78rem; }
+    .zapier-help summary { cursor:pointer; color:#b23b00; font-weight:800; }
+    .zapier-help p { margin:8px 0 0; line-height:1.5; }
+    .zapier-feedback { min-height:18px; margin:8px 0 0; color:var(--muted); font-size:.76rem; }
+    .zapier-feedback.error { color:var(--red); font-weight:700; }
+    .zapier-feedback.success { color:var(--green); font-weight:700; }
+    .zapier-config input { flex:1; min-width:0; }
+    .zapier-config .btn { padding:10px 13px; }
+    .zapier-flow { display:grid; gap:7px; margin-top:14px; color:var(--muted); font-size:.8rem; line-height:1.4; }
+    .zapier-flow strong { color:var(--ink); }
+    .zapier-flow span { display:inline-flex; align-items:center; gap:7px; }
+    .zapier-flow i { display:grid; place-items:center; width:20px; height:20px; border-radius:50%; color:#fff; background:#ff4f00; font-size:.7rem; font-style:normal; font-weight:800; }
+    .thinking-card { margin-top:18px; padding:22px; border:1px solid #e4d9ff; border-radius:18px; background:linear-gradient(135deg,#fcfaff,#f4efff); }
+    .thinking-card h3 { margin:0; font-size:1rem; }
+    .thinking-card > p { margin:5px 0 16px; color:var(--muted); font-size:.82rem; line-height:1.45; }
+    .thinking-form { display:grid; gap:9px; }
+    .thinking-form textarea { width:100%; min-height:78px; resize:vertical; border:1px solid #ded2f6; border-radius:13px; padding:12px 14px; color:var(--ink); background:#fff; outline:none; font:inherit; }
+    .thinking-form textarea:focus { border-color:#8d6bd1; box-shadow:0 0 0 3px #8d6bd126; }
+    .thinking-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .thinking-progress { margin-top:18px; padding-top:16px; border-top:1px solid #e6dcf7; }
+    .thinking-progress-head { display:flex; justify-content:space-between; gap:12px; color:var(--muted); font-size:.8rem; }
+    .thinking-progress-head strong { color:var(--ink); }
+    .thinking-bar { height:7px; margin:8px 0 14px; overflow:hidden; border-radius:99px; background:#e6dcf7; }
+    .thinking-bar span { display:block; width:0; height:100%; border-radius:inherit; background:#8d6bd1; transition:width .2s ease; }
+    .thinking-step { padding:14px; border:1px solid #e6dcf7; border-radius:13px; background:#fff; }
+    .thinking-step small { color:#8d6bd1; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
+    .thinking-step p { margin:6px 0 0; line-height:1.45; }
+    .thinking-nav { display:flex; justify-content:space-between; gap:8px; margin-top:10px; }
+    .calendar-card { margin-bottom:24px; padding:24px; background:var(--card); border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow); }
+    .calendar-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px; }
+    .calendar-head h3 { margin:0; font-size:1.05rem; text-transform:capitalize; }
+    .calendar-nav { display:flex; gap:6px; }
+    .calendar-nav button { width:34px; height:34px; border:0; border-radius:10px; color:var(--muted); background:#f3f5fa; }
+    .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
+    .calendar-weekday { padding:4px; color:var(--muted); font-size:.72rem; font-weight:800; text-align:center; }
+    .calendar-day { min-height:66px; padding:7px; border:1px solid var(--line); border-radius:12px; background:#fff; text-align:left; }
+    .calendar-day.empty { border-color:transparent; background:transparent; }
+    .calendar-day.today { border-color:var(--blue); box-shadow:inset 0 0 0 1px var(--blue); }
+    .calendar-number { display:block; color:var(--ink); font-size:.8rem; font-weight:800; }
+    .calendar-task { display:block; overflow:hidden; margin-top:5px; padding:3px 5px; border-radius:5px; color:var(--blue-dark); background:var(--blue-soft); font-size:.66rem; text-overflow:ellipsis; white-space:nowrap; }
+    .calendar-task.done { color:var(--green); background:#e9f8f1; text-decoration:line-through; }
+    .calendar-empty { margin:12px 0 0; color:var(--muted); font-size:.8rem; }
+    @keyframes appear { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:none; } }
+    .shell { padding-top:28px; }
+    .topbar { margin-bottom:28px; }
+    .logo { border-radius:14px; background:linear-gradient(135deg,#6254d9,#33278f); box-shadow:0 12px 24px #5146c13d; }
+    .intro, .progress-card, .panel, .calendar-card { border-color:#e5e3f0; box-shadow:0 20px 50px rgba(47,38,112,.08); }
+    .intro { background:linear-gradient(135deg,#fff 0%,#f8f7ff 100%); }
+    .intro h2 { color:#28204f; }
+    .eyebrow { color:#6254d9; }
+    .btn-primary { background:linear-gradient(135deg,#6254d9,#33278f); box-shadow:0 9px 20px #5146c13d; }
+    .btn-primary:hover { background:#33278f; }
+    .calendar-card { background:linear-gradient(180deg,#fff,#fbfaff); }
+    .calendar-day { transition:.18s ease; }
+    .calendar-day:not(.empty):hover { border-color:#bdb5ef; background:#faf9ff; transform:translateY(-1px); }
+    .calendar-day.today { background:#f3f1ff; }
+    .calendar-task { background:#eeecff; color:#4034a1; }
+    .task { border-color:#e7e5f0; }
+    .task:hover { border-color:#bdb5ef; box-shadow:0 8px 22px rgba(47,38,112,.1); }
+    .thinking-card { background:linear-gradient(135deg,#fbf9ff,#f1eeff); }
+    .zapier-card { background:linear-gradient(135deg,#fffaf7,#fff3ec); border-color:#f4d9c8; }
+    body { overflow-x:hidden; background:radial-gradient(circle at 8% -10%,#dceefa 0,transparent 30rem),radial-gradient(circle at 100% 5%,#eee9ff 0,transparent 25rem),var(--bg); }
+    body::before, body::after { content:""; position:fixed; z-index:-1; width:260px; height:260px; border-radius:50%; filter:blur(8px); opacity:.32; pointer-events:none; }
+    body::before { top:38%; left:-150px; background:#b9dfff; animation:orbFloat 12s ease-in-out infinite alternate; }
+    body::after { right:-130px; bottom:8%; background:#d7c8ff; animation:orbFloat 15s ease-in-out -4s infinite alternate-reverse; }
+    .topbar { animation:slideDown .65s cubic-bezier(.2,.8,.2,1) both; }
+    .hero { animation:riseIn .7s .08s cubic-bezier(.2,.8,.2,1) both; }
+    .calendar-card { animation:riseIn .7s .16s cubic-bezier(.2,.8,.2,1) both; }
+    .panel { animation:riseIn .7s .24s cubic-bezier(.2,.8,.2,1) both; }
+    .logo { animation:logoFloat 4s ease-in-out infinite; }
+    .progress-card { overflow:hidden; position:relative; }
+    .progress-card::after { content:""; position:absolute; top:-80%; left:-35%; width:35%; height:260%; transform:rotate(24deg); background:linear-gradient(90deg,transparent,#ffffff90,transparent); animation:shine 6s ease-in-out infinite; pointer-events:none; }
+    .ring { transition:--progress .6s ease; animation:ringPulse 3.5s ease-in-out infinite; }
+    .btn-primary { position:relative; overflow:hidden; }
+    .btn-primary::after { content:""; position:absolute; top:0; left:-80%; width:55%; height:100%; transform:skewX(-20deg); background:#ffffff35; animation:buttonShine 4.8s ease-in-out infinite; }
+    .task, .calendar-day { will-change:transform; }
+    .task:nth-child(2n) { animation-delay:.04s; }
+    .calendar-day.today .calendar-number { color:#6254d9; animation:softBlink 2.4s ease-in-out infinite; }
+    .zapier-mark { animation:zapierBounce 3s ease-in-out infinite; }
+    @keyframes riseIn { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+    @keyframes slideDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:none; } }
+    @keyframes logoFloat { 0%,100% { transform:translateY(0) rotate(0); } 50% { transform:translateY(-5px) rotate(-3deg); } }
+    @keyframes orbFloat { from { transform:translate(0,0) scale(1); } to { transform:translate(80px,-45px) scale(1.18); } }
+    @keyframes shine { 0%,55% { left:-50%; } 75%,100% { left:130%; } }
+    @keyframes buttonShine { 0%,58% { left:-80%; } 78%,100% { left:140%; } }
+    @keyframes ringPulse { 0%,100% { box-shadow:0 10px 30px #1769aa1c; } 50% { box-shadow:0 12px 38px #6254d933; } }
+    @keyframes softBlink { 0%,100% { opacity:1; } 50% { opacity:.62; } }
+    @keyframes zapierBounce { 0%,80%,100% { transform:translateY(0); } 86% { transform:translateY(-4px) rotate(-4deg); } 92% { transform:translateY(0) rotate(4deg); } }
+    @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; } }
+    @media (max-width:720px) { .shell { width:min(100% - 20px, 560px); padding-top:20px; } .topbar { align-items:flex-start; margin-bottom:24px; } .date { display:none; } .hero { grid-template-columns:1fr; gap:14px; } .progress-card { min-height:250px; } .intro, .panel, .calendar-card { padding:20px; } .intro { display:block; } .intro h2 { font-size:2.55rem; } .intro-art { min-height:150px; margin-top:22px; } .intro-art img { min-height:150px; } .add-form { flex-wrap:wrap; } .task-options { grid-template-columns:1fr 1fr; } .task-options input:first-child { grid-column:1 / -1; } .add-form .btn { width:100%; } .calendar-day { min-height:54px; padding:5px; } .calendar-task { font-size:.58rem; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="logo" aria-hidden="true">✓</div><div><h1>Clareza</h1><small>Seu espaço para organizar o dia</small></div></div>
+      <div class="date" id="today"></div>
+    </header>
+
+    <section class="hero" aria-label="Resumo da lista">
+      <div class="intro"><div class="intro-copy"><p class="eyebrow">Lista pessoal</p><h2>Pequenos passos,<br>grandes avanços.</h2><p>Adicione o que precisa fazer, marque o que já concluiu e mantenha o foco no próximo passo.</p></div><div class="intro-art"><img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=85" alt="Mesa de trabalho organizada com caderno, café e computador" loading="lazy"><div class="art-label"><span class="pulse"></span> Espaço para boas ideias</div></div></div>
+      <aside class="progress-card"><div class="progress-title"><span>Progresso de hoje</span><strong id="progressText">0%</strong></div><div class="ring" id="progressRing"><span id="progressNumber">0/0</span></div><p class="quote">“A constância transforma intenção em resultado.”</p></aside>
+    </section>
+
+    <section class="calendar-card" aria-label="Calendário de tarefas"><div class="calendar-head"><h3 id="calendarTitle"></h3><div class="calendar-nav"><button id="calendarPrev" type="button" aria-label="Mês anterior">←</button><button id="calendarToday" type="button">Hoje</button><button id="calendarNext" type="button" aria-label="Próximo mês">→</button></div></div><div class="calendar-grid" id="calendarGrid"></div><p class="calendar-empty" id="calendarEmpty">Adicione uma tarefa com data para vê-la no calendário.</p></section>
+
+    <section class="panel">
+      <form class="add-form" id="taskForm"><div class="task-options"><input id="taskInput" type="text" maxlength="120" placeholder="O que você precisa fazer?" autocomplete="off" aria-label="Nova tarefa"><input id="taskDate" type="date" aria-label="Prazo da tarefa" title="Prazo"><input id="taskDuration" type="text" maxlength="30" placeholder="Duração (ex.: 30 min)" aria-label="Duração"><input id="taskGoal" type="text" maxlength="100" placeholder="Meta relacionada (opcional)" aria-label="Meta relacionada"></div><button class="btn btn-primary" type="submit">+ Adicionar tarefa</button></form>
+      <div class="toolbar"><div class="input-wrap"><span aria-hidden="true">⌕</span><input id="searchInput" type="text" placeholder="Buscar tarefas..." aria-label="Buscar tarefas"></div><select id="filterSelect" aria-label="Filtrar tarefas"><option value="all">Todas</option><option value="active">Pendentes</option><option value="done">Concluídas</option></select><button class="btn btn-ghost" id="clearDone" type="button">Limpar concluídas</button></div>
+      <div class="summary"><h3>Minhas tarefas</h3><span class="count" id="taskCount">0 tarefas</span></div>
+      <ul class="task-list" id="taskList"></ul>
+      <p class="tip">Dica: pressione <kbd>Enter</kbd> para adicionar ou arraste <span aria-hidden="true">⠿</span> para reorganizar.</p>
+    </section>
+      <section class="thinking-card" aria-label="Pensamento sequencial"><h3>✦ Organize por etapas</h3><p>Transforme um objetivo grande em pequenos passos e avance com clareza.</p><form class="thinking-form" id="thinkingForm"><input id="thinkingGoal" type="text" maxlength="120" placeholder="Ex.: preparar apresentação do projeto" aria-label="Objetivo do plano"><textarea id="thinkingSteps" placeholder="Uma etapa por linha" aria-label="Etapas do plano"></textarea><div class="thinking-actions"><button class="btn btn-primary" type="submit">Começar plano</button><button class="btn btn-ghost" id="thinkingTemplate" type="button">Usar roteiro básico</button><button class="btn btn-ghost" id="clearThinking" type="button">Limpar</button></div></form><div class="thinking-progress" id="thinkingProgress" hidden><div class="thinking-progress-head"><strong id="thinkingGoalLabel"></strong><span id="thinkingCount"></span></div><div class="thinking-bar"><span id="thinkingBar"></span></div><div class="thinking-step"><small id="thinkingStepLabel"></small><p id="thinkingStepText"></p></div><div class="thinking-nav"><button class="btn btn-ghost" id="thinkingPrev" type="button">← Voltar</button><button class="btn btn-primary" id="thinkingNext" type="button">Concluir etapa →</button></div></div></section><aside class="zapier-card" aria-labelledby="zapierTitle"><div class="zapier-head"><div class="zapier-title"><span class="zapier-mark" aria-hidden="true">Z</span><div><h3 id="zapierTitle">Automatizações</h3><p>Conecte uma vez e deixe o Zapier avisar outras ferramentas quando algo acontecer aqui.</p></div></div><span class="zapier-status" id="zapierStatus" role="status" aria-live="polite">Ainda não conectado</span></div><div class="zapier-flow"><span><i aria-hidden="true">1</i><strong>Crie um Zap</strong> usando “Webhooks by Zapier → Catch Hook”.</span><span><i aria-hidden="true">2</i><strong>Cole a URL abaixo</strong> e salve a conexão.</span><span><i aria-hidden="true">3</i> Novas tarefas e etapas concluídas podem virar avisos no Gmail, Slack ou Trello.</span></div><details class="zapier-help"><summary>Não sabe onde encontrar a URL?</summary><p>No Zapier, escolha <strong>Webhooks by Zapier</strong>, selecione <strong>Catch Hook</strong>, avance até o endereço aparecer e copie-o para o campo abaixo.</p></details><div class="zapier-config"><label for="zapierWebhook">URL do webhook do Zapier</label><input id="zapierWebhook" type="url" inputmode="url" autocomplete="url" placeholder="Cole a URL recebida do Zapier" aria-describedby="zapierFeedback"><button class="btn btn-ghost" id="saveZapier" type="button">Salvar conexão</button></div><p class="zapier-feedback" id="zapierFeedback" role="status" aria-live="polite"></p></aside>
+  </main>
+
+  <script>
+    const STORAGE_KEY = 'clareza-tarefas-v1';
+    const ZAPIER_KEY = 'clareza-zapier-webhook-v1';
+    const THINKING_KEY = 'clareza-sequential-plan-v1';
+    const initialTasks = [
+      { id: 1, text: 'Planejar as prioridades do dia', done: true },
+      { id: 2, text: 'Reservar 30 minutos para estudar', done: false },
+      { id: 3, text: 'Beber água e fazer uma pausa', done: false }
+    ];
+    let tasks = loadTasks();
+    const $ = (selector) => document.querySelector(selector);
+
+    function loadTasks() {
+      try { const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)); return Array.isArray(saved) ? saved : initialTasks; }
+      catch { return initialTasks; }
+    }
+    function saveTasks() { localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)); }
+    function getZapierWebhook() { return localStorage.getItem(ZAPIER_KEY) || ''; }
+    function updateZapierStatus(message = '') { const url = getZapierWebhook(); $('#zapierWebhook').value = url; $('#zapierStatus').textContent = url ? 'Conectado' : 'Ainda não conectado'; $('#zapierStatus').classList.toggle('connected', Boolean(url)); $('#zapierFeedback').textContent = message || (url ? 'Tudo certo. Os próximos eventos serão enviados ao Zapier.' : 'Cole uma URL de webhook para ativar as automações.'); $('#zapierFeedback').className = `zapier-feedback ${url ? 'success' : ''}`; }
+    async function notifyZapier(event, task) { const url = getZapierWebhook(); if (!url) return; try { await fetch(url, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'text/plain;charset=UTF-8' }, body:JSON.stringify({ event, task, source:'Clareza', sent_at:new Date().toISOString() }) }); } catch {} }
+    let thinkingPlan = loadThinkingPlan();
+    function loadThinkingPlan() { try { return JSON.parse(localStorage.getItem(THINKING_KEY)) || null; } catch { return null; } }
+    function saveThinkingPlan() { if (thinkingPlan) localStorage.setItem(THINKING_KEY, JSON.stringify(thinkingPlan)); else localStorage.removeItem(THINKING_KEY); }
+    function renderThinking() { const box = $('#thinkingProgress'); if (!thinkingPlan || !thinkingPlan.steps.length) { box.hidden = true; return; } box.hidden = false; const done = thinkingPlan.steps.filter(step => step.done).length; const current = Math.min(thinkingPlan.current, thinkingPlan.steps.length - 1); $('#thinkingGoalLabel').textContent = thinkingPlan.goal; $('#thinkingCount').textContent = `${done}/${thinkingPlan.steps.length} concluídas`; $('#thinkingBar').style.width = `${Math.round(done / thinkingPlan.steps.length * 100)}%`; $('#thinkingStepLabel').textContent = `Etapa ${current + 1} de ${thinkingPlan.steps.length}`; $('#thinkingStepText').textContent = thinkingPlan.steps[current].text; $('#thinkingPrev').disabled = current === 0; $('#thinkingNext').textContent = thinkingPlan.steps[current].done ? (current === thinkingPlan.steps.length - 1 ? 'Plano concluído ✓' : 'Próxima etapa →') : 'Concluir e avançar →'; }
+    function render() {
+      const query = $('#searchInput').value.trim().toLowerCase();
+      const filter = $('#filterSelect').value;
+      const visible = tasks.filter(task => (!query || task.text.toLowerCase().includes(query)) && (filter === 'all' || (filter === 'done' ? task.done : !task.done)));
+      const list = $('#taskList');
+      list.innerHTML = visible.length ? visible.map(task => `<li class="task ${task.done ? 'done' : ''}" draggable="true" data-task-id="${task.id}"><span class="drag-handle" title="Arraste para reordenar" aria-hidden="true">⠿</span><input class="check" type="checkbox" ${task.done ? 'checked' : ''} data-action="toggle" data-id="${task.id}" aria-label="Marcar ${escapeHtml(task.text)} como concluída"><div class="task-content"><span class="task-text">${escapeHtml(task.text)}</span><span class="task-meta">${formatTaskMeta(task)}</span></div><button class="delete" type="button" data-action="delete" data-id="${task.id}" aria-label="Excluir tarefa">×</button></li>`).join('') : '<li class="empty"><div class="empty-icon">✦</div><strong>Nenhuma tarefa encontrada</strong><br><span>Tente mudar o filtro ou adicionar uma nova tarefa.</span></li>';
+      const done = tasks.filter(task => task.done).length;
+      const percent = tasks.length ? Math.round(done / tasks.length * 100) : 0;
+      $('#progressText').textContent = percent + '%'; $('#progressNumber').textContent = `${done}/${tasks.length}`; $('#progressRing').style.setProperty('--progress', percent + '%');
+      $('#taskCount').textContent = `${tasks.length} ${tasks.length === 1 ? 'tarefa' : 'tarefas'}`;
+      renderCalendar();
+    }
+    function formatTaskMeta(task) { const parts = [task.done ? 'Concluída' : 'Pendente']; if (task.dueDate) parts.push(`Prazo: ${new Intl.DateTimeFormat('pt-BR').format(new Date(task.dueDate + 'T12:00:00'))}`); if (task.duration) parts.push(`Duração: ${escapeHtml(task.duration)}`); if (task.goal) parts.push(`Meta: ${escapeHtml(task.goal)}`); return parts.join(' · '); }
+    let calendarMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    function renderCalendar() { const year = calendarMonth.getFullYear(); const month = calendarMonth.getMonth(); $('#calendarTitle').textContent = new Intl.DateTimeFormat('pt-BR', { month:'long', year:'numeric' }).format(calendarMonth); const firstDay = new Date(year, month, 1).getDay(); const days = new Date(year, month + 1, 0).getDate(); const names = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb']; let html = names.map(name => `<span class="calendar-weekday">${name}</span>`).join(''); for (let i = 0; i < firstDay; i++) html += '<span class="calendar-day empty"></span>'; for (let day = 1; day <= days; day++) { const date = `${year}-${String(month + 1).padStart(2,'0')}-${String(day).padStart(2,'0')}`; const today = new Date(); const isToday = date === `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`; const dayTasks = tasks.filter(task => task.dueDate === date); html += `<div class="calendar-day ${isToday ? 'today' : ''}"><span class="calendar-number">${day}</span>${dayTasks.slice(0, 2).map(task => `<span class="calendar-task ${task.done ? 'done' : ''}" title="${escapeHtml(task.text)}">${escapeHtml(task.text)}</span>`).join('')}</div>`; } $('#calendarGrid').innerHTML = html; $('#calendarEmpty').hidden = tasks.some(task => task.dueDate); }
+    function escapeHtml(value) { return value.replace(/[&<>'"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[char])); }
+    $('#taskForm').addEventListener('submit', event => { event.preventDefault(); const input = $('#taskInput'); const text = input.value.trim(); if (!text) { input.focus(); return; } const task = { id: Date.now(), text, done: false, dueDate: $('#taskDate').value, duration: $('#taskDuration').value.trim(), goal: $('#taskGoal').value.trim() }; tasks.unshift(task); input.value = ''; $('#taskDate').value = ''; $('#taskDuration').value = ''; $('#taskGoal').value = ''; saveTasks(); render(); notifyZapier('task.created', task); input.focus(); });
+    $('#taskList').addEventListener('click', event => { const control = event.target.closest('[data-action]'); if (!control) return; const id = Number(control.dataset.id); const task = tasks.find(item => item.id === id); if (!task) return; if (control.dataset.action === 'delete') { tasks = tasks.filter(item => item.id !== id); notifyZapier('task.deleted', task); } else { task.done = !task.done; notifyZapier(task.done ? 'task.completed' : 'task.reopened', task); } saveTasks(); render(); });
+    let draggedId = null;
+    $('#taskList').addEventListener('dragstart', event => { const item = event.target.closest('.task'); if (!item) return; draggedId = Number(item.dataset.taskId); item.classList.add('dragging'); event.dataTransfer.effectAllowed = 'move'; });
+    $('#taskList').addEventListener('dragover', event => { event.preventDefault(); const target = event.target.closest('.task'); if (!target || Number(target.dataset.taskId) === draggedId) return; document.querySelectorAll('.task').forEach(task => task.classList.remove('drag-over')); target.classList.add('drag-over'); });
+    $('#taskList').addEventListener('drop', event => { event.preventDefault(); const target = event.target.closest('.task'); if (!target || draggedId === null) return; const targetId = Number(target.dataset.taskId); if (targetId !== draggedId) { const from = tasks.findIndex(task => task.id === draggedId); const to = tasks.findIndex(task => task.id === targetId); const [moved] = tasks.splice(from, 1); tasks.splice(to, 0, moved); saveTasks(); render(); } draggedId = null; });
+    $('#taskList').addEventListener('dragend', () => { draggedId = null; document.querySelectorAll('.task').forEach(task => task.classList.remove('dragging', 'drag-over')); });
+    $('#searchInput').addEventListener('input', render); $('#filterSelect').addEventListener('change', render);
+    $('#clearDone').addEventListener('click', () => { tasks = tasks.filter(task => !task.done); saveTasks(); render(); });
+    $('#calendarPrev').addEventListener('click', () => { calendarMonth = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() - 1, 1); renderCalendar(); });
+    $('#calendarNext').addEventListener('click', () => { calendarMonth = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + 1, 1); renderCalendar(); });
+    $('#calendarToday').addEventListener('click', () => { const now = new Date(); calendarMonth = new Date(now.getFullYear(), now.getMonth(), 1); renderCalendar(); });
+    $('#saveZapier').addEventListener('click', () => { const input = $('#zapierWebhook'); const feedback = $('#zapierFeedback'); const url = input.value.trim(); if (url && !/^https:\/\//i.test(url)) { feedback.textContent = 'A URL precisa começar com https://. Confira o endereço e tente novamente.'; feedback.className = 'zapier-feedback error'; input.setAttribute('aria-invalid', 'true'); input.focus(); return; } input.removeAttribute('aria-invalid'); if (url) localStorage.setItem(ZAPIER_KEY, url); else localStorage.removeItem(ZAPIER_KEY); updateZapierStatus(url ? 'Conexão salva com sucesso.' : 'Conexão removida.'); });
+    $('#thinkingForm').addEventListener('submit', event => { event.preventDefault(); const goal = $('#thinkingGoal').value.trim(); const lines = $('#thinkingSteps').value.split('\n').map(line => line.trim()).filter(Boolean); if (!goal || !lines.length) { $('#thinkingGoal').focus(); return; } thinkingPlan = { goal, steps: lines.map(text => ({ text, done:false })), current:0 }; saveThinkingPlan(); renderThinking(); notifyZapier('sequential.plan_created', thinkingPlan); });
+    $('#thinkingTemplate').addEventListener('click', () => { const goal = $('#thinkingGoal').value.trim() || 'meu objetivo'; $('#thinkingGoal').value = goal; $('#thinkingSteps').value = `Definir o resultado esperado para ${goal}\nSeparar os materiais e informações necessários\nExecutar a primeira ação importante\nRevisar o resultado e finalizar`; $('#thinkingSteps').focus(); });
+    $('#thinkingPrev').addEventListener('click', () => { if (!thinkingPlan) return; thinkingPlan.current = Math.max(0, thinkingPlan.current - 1); saveThinkingPlan(); renderThinking(); });
+    $('#thinkingNext').addEventListener('click', () => { if (!thinkingPlan) return; const step = thinkingPlan.steps[thinkingPlan.current]; if (!step.done) { step.done = true; notifyZapier('sequential.step_completed', { goal:thinkingPlan.goal, step, step_number:thinkingPlan.current + 1 }); } else { thinkingPlan.current = Math.min(thinkingPlan.steps.length - 1, thinkingPlan.current + 1); } saveThinkingPlan(); renderThinking(); });
+    $('#clearThinking').addEventListener('click', () => { thinkingPlan = null; saveThinkingPlan(); $('#thinkingGoal').value = ''; $('#thinkingSteps').value = ''; renderThinking(); });
+    $('#today').textContent = new Intl.DateTimeFormat('pt-BR', { weekday:'long', day:'numeric', month:'long' }).format(new Date());
+    render(); updateZapierStatus(); renderThinking();
+  </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+- main [ref=f2e2]:
+  - generic [ref=f2e3]:
+    - generic [ref=f2e4]:
+      - generic [aria-hidden] [ref=f2e5]: ✓
+      - generic [ref=f2e6]:
+        - heading "Clareza" [level=1] [ref=f2e7]
+        - text: Seu espaço para organizar o dia
+    - generic [ref=f2e8]: sábado, 19 de setembro
+  - region "Resumo da lista" [ref=f2e9]:
+    - generic [ref=f2e10]:
+      - generic [ref=f2e11]:
+        - paragraph [ref=f2e12]: Lista pessoal
+        - heading "Pequenos passos, grandes avanços." [level=2] [ref=f2e13]: Pequenos passos,grandes avanços.
+        - paragraph [ref=f2e14]: Adicione o que precisa fazer, marque o que já concluiu e mantenha o foco no próximo passo.
+      - generic [ref=f2e15]:
+        - img "Mesa de trabalho organizada com caderno, café e computador" [ref=f2e16]
+        - generic [ref=f2e17]: Espaço para boas ideias
+    - complementary [ref=f2e19]:
+      - generic [ref=f2e20]:
+        - generic [ref=f2e21]: Progresso de hoje
+        - strong [ref=f2e22]: 0%
+      - generic [ref=f2e23]: 0/3
+      - paragraph [ref=f2e25]: “A constância transforma intenção em resultado.”
+  - region "Calendário de tarefas" [ref=f2e26]:
+    - generic [ref=f2e27]:
+      - heading "setembro de 2026" [level=3] [ref=f2e28]
+      - generic [ref=f2e29]:
+        - button "Mês anterior" [ref=f2e30] [cursor=pointer]: ←
+        - button "Hoje" [ref=f2e31] [cursor=pointer]
+        - button "Próximo mês" [ref=f2e32] [cursor=pointer]: →
+    - generic [ref=f2e33]:
+      - generic [ref=f2e34]: Dom
+      - generic [ref=f2e35]: Seg
+      - generic [ref=f2e36]: Ter
+      - generic [ref=f2e37]: Qua
+      - generic [ref=f2e38]: Qui
+      - generic [ref=f2e39]: Sex
+      - generic [ref=f2e40]: Sáb
+      - generic [ref=f2e43]: "1"
+      - generic [ref=f2e45]: "2"
+      - generic [ref=f2e47]: "3"
+      - generic [ref=f2e49]: "4"
+      - generic [ref=f2e51]: "5"
+      - generic [ref=f2e53]: "6"
+      - generic [ref=f2e55]: "7"
+      - generic [ref=f2e57]: "8"
+      - generic [ref=f2e59]: "9"
+      - generic [ref=f2e61]: "10"
+      - generic [ref=f2e63]: "11"
+      - generic [ref=f2e65]: "12"
+      - generic [ref=f2e67]: "13"
+      - generic [ref=f2e69]: "14"
+      - generic [ref=f2e71]: "15"
+      - generic [ref=f2e73]: "16"
+      - generic [ref=f2e75]: "17"
+      - generic [ref=f2e77]: "18"
+      - generic [ref=f2e79]: "19"
+      - generic [ref=f2e81]: "20"
+      - generic [ref=f2e83]: "21"
+      - generic [ref=f2e85]: "22"
+      - generic [ref=f2e87]: "23"
+      - generic [ref=f2e89]: "24"
+      - generic [ref=f2e91]: "25"
+      - generic [ref=f2e93]: "26"
+      - generic [ref=f2e95]: "27"
+      - generic [ref=f2e97]: "28"
+      - generic [ref=f2e99]: "29"
+      - generic [ref=f2e101]: "30"
+    - paragraph [ref=f2e103]: Adicione uma tarefa com data para vê-la no calendário.
+  - generic [ref=f2e104]:
+    - generic [ref=f2e105]:
+      - generic [ref=f2e106]:
+        - textbox "Nova tarefa" [ref=f2e107]:
+          - /placeholder: O que você precisa fazer?
+        - textbox "Prazo da tarefa" [ref=f2e108]
+        - textbox "Duração" [ref=f2e109]:
+          - /placeholder: "Duração (ex.: 30 min)"
+        - textbox "Meta relacionada" [ref=f2e110]:
+          - /placeholder: Meta relacionada (opcional)
+      - button "+ Adicionar tarefa" [ref=f2e111] [cursor=pointer]
+    - generic [ref=f2e112]:
+      - generic [ref=f2e113]:
+        - generic [aria-hidden] [ref=f2e114]: ⌕
+        - textbox "Buscar tarefas" [ref=f2e115]:
+          - /placeholder: Buscar tarefas...
+      - combobox "Filtrar tarefas" [ref=f2e116]:
+        - option "Todas" [selected]
+        - option "Pendentes"
+        - option "Concluídas"
+      - button "Limpar concluídas" [ref=f2e117] [cursor=pointer]
+    - generic [ref=f2e118]:
+      - heading "Minhas tarefas" [level=3] [ref=f2e119]
+      - generic [ref=f2e120]: 3 tarefas
+    - list [ref=f2e121]:
+      - listitem [ref=f2e122]:
+        - generic [aria-hidden] [ref=f2e123]: ⠿
+        - checkbox "Marcar Teste Zapier como concluída" [ref=f2e124]
+        - generic [ref=f2e125]:
+          - generic [ref=f2e126]: Teste Zapier
+          - text: Pendente
+        - button "Excluir tarefa" [ref=f2e127] [cursor=pointer]: ×
+      - listitem [ref=f2e128]:
+        - generic [aria-hidden] [ref=f2e129]: ⠿
+        - checkbox "Marcar Reservar 30 minutos para estudar como concluída" [ref=f2e130]
+        - generic [ref=f2e131]:
+          - generic [ref=f2e132]: Reservar 30 minutos para estudar
+          - text: Pendente
+        - button "Excluir tarefa" [ref=f2e133] [cursor=pointer]: ×
+      - listitem [ref=f2e134]:
+        - generic [aria-hidden] [ref=f2e135]: ⠿
+        - checkbox "Marcar Beber água e fazer uma pausa como concluída" [ref=f2e136]
+        - generic [ref=f2e137]:
+          - generic [ref=f2e138]: Beber água e fazer uma pausa
+          - text: Pendente
+        - button "Excluir tarefa" [ref=f2e139] [cursor=pointer]: ×
+    - paragraph [ref=f2e140]: "Dica: pressione Enter para adicionar ou arraste ⠿ para reorganizar."
+  - region "Pensamento sequencial" [ref=f2e141]:
+    - heading "✦ Organize por etapas" [level=3] [ref=f2e142]
+    - paragraph [ref=f2e143]: Transforme um objetivo grande em pequenos passos e avance com clareza.
+    - generic [ref=f2e144]:
+      - textbox "Objetivo do plano" [ref=f2e145]:
+        - /placeholder: "Ex.: preparar apresentação do projeto"
+      - textbox "Etapas do plano" [ref=f2e146]:
+        - /placeholder: Uma etapa por linha
+      - generic [ref=f2e147]:
+        - button "Começar plano" [ref=f2e148] [cursor=pointer]
+        - button "Usar roteiro básico" [ref=f2e149] [cursor=pointer]
+        - button "Limpar" [ref=f2e150] [cursor=pointer]
+    - generic [ref=f2e151]:
+      - generic [ref=f2e152]:
+        - strong [ref=f2e153]: Lançar campanha
+        - generic [ref=f2e154]: 1/4 concluídas
+      - generic [ref=f2e157]:
+        - text: Etapa 1 de 4
+        - paragraph [ref=f2e158]: Definir o resultado esperado para Lançar campanha
+      - generic [ref=f2e159]:
+        - button "← Voltar" [disabled] [ref=f2e160] [cursor=pointer]
+        - button "Próxima etapa →" [ref=f2e161] [cursor=pointer]
+  - complementary [ref=f2e162]:
+    - generic [ref=f2e163]:
+      - generic [ref=f2e164]:
+        - generic [aria-hidden] [ref=f2e165]: Z
+        - generic [ref=f2e166]:
+          - heading "Automatizações" [level=3] [ref=f2e167]
+          - paragraph [ref=f2e168]: Conecte uma vez e deixe o Zapier avisar outras ferramentas quando algo acontecer aqui.
+      - status [ref=f2e169]: Conectado
+    - generic [ref=f2e170]:
+      - generic [ref=f2e171]:
+        - generic [aria-hidden] [ref=f2e172]: "1"
+        - strong [ref=f2e173]: Crie um Zap
+        - text: usando “Webhooks by Zapier → Catch Hook”.
+      - generic [ref=f2e174]:
+        - generic [aria-hidden] [ref=f2e175]: "2"
+        - strong [ref=f2e176]: Cole a URL abaixo
+        - text: e salve a conexão.
+      - generic [ref=f2e177]:
+        - generic [aria-hidden] [ref=f2e178]: "3"
+        - text: Novas tarefas e etapas concluídas podem virar avisos no Gmail, Slack ou Trello.
+    - group [ref=f2e179]:
+      - generic "Não sabe onde encontrar a URL?" [ref=f2e180] [cursor=pointer]
+    - generic [ref=f2e181]:
+      - generic [ref=f2e182]: URL do webhook do Zapier
+      - textbox "URL do webhook do Zapier" [ref=f2e183]:
+        - /placeholder: Cole a URL recebida do Zapier
+        - text: https://hooks.zapier.com/hooks/catch/test
+      - button "Salvar conexão" [ref=f2e184] [cursor=pointer]
+    - status [ref=f2e185]: Tudo certo. Os próximos eventos serão enviados ao Zapier.

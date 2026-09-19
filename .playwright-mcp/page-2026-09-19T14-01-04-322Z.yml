@@ -1,0 +1,71 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [aria-hidden] [ref=e5]: ✓
+      - generic [ref=e6]:
+        - heading "Clareza" [level=1] [ref=e7]
+        - text: Seu espaço para organizar o dia
+    - generic [ref=e8]: sábado, 19 de setembro
+  - region "Resumo da lista" [ref=e9]:
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - paragraph [ref=e12]: Lista pessoal
+        - heading "Pequenos passos, grandes avanços." [level=2] [ref=e13]: Pequenos passos,grandes avanços.
+        - paragraph [ref=e14]: Adicione o que precisa fazer, marque o que já concluiu e mantenha o foco no próximo passo.
+      - generic [ref=e15]:
+        - img "Mesa de trabalho organizada com caderno, café e computador" [ref=e16]
+        - generic [ref=e17]: Espaço para boas ideias
+    - complementary [ref=e19]:
+      - generic [ref=e20]:
+        - generic [ref=e21]: Progresso de hoje
+        - strong [ref=e22]: 25%
+      - generic [ref=e23]: 1/4
+      - paragraph [ref=e25]: “A constância transforma intenção em resultado.”
+  - generic [ref=e26]:
+    - generic [ref=e27]:
+      - textbox "Nova tarefa" [active] [ref=e28]:
+        - /placeholder: O que você precisa fazer?
+      - button "+ Adicionar tarefa" [ref=e29] [cursor=pointer]
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - generic [aria-hidden] [ref=e32]: ⌕
+        - textbox "Buscar tarefas" [ref=e33]:
+          - /placeholder: Buscar tarefas...
+      - combobox "Filtrar tarefas" [ref=e34]:
+        - option "Todas" [selected]
+        - option "Pendentes"
+        - option "Concluídas"
+      - button "Limpar concluídas" [ref=e35] [cursor=pointer]
+    - generic [ref=e36]:
+      - heading "Minhas tarefas" [level=3] [ref=e37]
+      - generic [ref=e38]: 4 tarefas
+    - list [ref=e39]:
+      - listitem [ref=e59]:
+        - generic [aria-hidden] [ref=e60]: ⠿
+        - checkbox "Marcar Tarefa de avaliação Playwright como concluída" [ref=e61]
+        - generic [ref=e62]:
+          - generic [ref=e63]: Tarefa de avaliação Playwright
+          - text: Pendente
+        - button "Excluir tarefa" [ref=e64] [cursor=pointer]: ×
+      - listitem [ref=e65]:
+        - generic [aria-hidden] [ref=e66]: ⠿
+        - checkbox "Marcar Planejar as prioridades do dia como concluída" [checked] [ref=e67]: ✓
+        - generic [ref=e68]:
+          - generic [ref=e69]: Planejar as prioridades do dia
+          - text: Concluída
+        - button "Excluir tarefa" [ref=e70] [cursor=pointer]: ×
+      - listitem [ref=e71]:
+        - generic [aria-hidden] [ref=e72]: ⠿
+        - checkbox "Marcar Reservar 30 minutos para estudar como concluída" [ref=e73]
+        - generic [ref=e74]:
+          - generic [ref=e75]: Reservar 30 minutos para estudar
+          - text: Pendente
+        - button "Excluir tarefa" [ref=e76] [cursor=pointer]: ×
+      - listitem [ref=e77]:
+        - generic [aria-hidden] [ref=e78]: ⠿
+        - checkbox "Marcar Beber água e fazer uma pausa como concluída" [ref=e79]
+        - generic [ref=e80]:
+          - generic [ref=e81]: Beber água e fazer uma pausa
+          - text: Pendente
+        - button "Excluir tarefa" [ref=e82] [cursor=pointer]: ×
+    - paragraph [ref=e58]: "Dica: pressione Enter para adicionar ou arraste ⠿ para reorganizar."

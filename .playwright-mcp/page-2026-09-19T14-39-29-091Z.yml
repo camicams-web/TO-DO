@@ -1,0 +1,71 @@
+- main [ref=f1e2]:
+  - generic [ref=f1e3]:
+    - generic [ref=f1e4]:
+      - generic [aria-hidden] [ref=f1e5]: ✓
+      - generic [ref=f1e6]:
+        - heading "Clareza" [level=1] [ref=f1e7]
+        - text: Seu espaço para organizar o dia
+    - generic [ref=f1e8]: sábado, 19 de setembro
+  - region "Resumo da lista" [ref=f1e9]:
+    - generic [ref=f1e10]:
+      - generic [ref=f1e11]:
+        - paragraph [ref=f1e12]: Lista pessoal
+        - heading "Pequenos passos, grandes avanços." [level=2] [ref=f1e13]: Pequenos passos,grandes avanços.
+        - paragraph [ref=f1e14]: Adicione o que precisa fazer, marque o que já concluiu e mantenha o foco no próximo passo.
+      - generic [ref=f1e15]:
+        - img "Mesa de trabalho organizada com caderno, café e computador" [ref=f1e16]
+        - generic [ref=f1e17]: Espaço para boas ideias
+    - complementary [ref=f1e19]:
+      - generic [ref=f1e20]:
+        - generic [ref=f1e21]: Progresso de hoje
+        - strong [ref=f1e22]: 50%
+      - generic [ref=f1e23]: 2/4
+      - paragraph [ref=f1e25]: “A constância transforma intenção em resultado.”
+  - generic [ref=f1e26]:
+    - generic [ref=f1e27]:
+      - textbox "Nova tarefa" [ref=f1e28]:
+        - /placeholder: O que você precisa fazer?
+      - button "+ Adicionar tarefa" [ref=f1e29] [cursor=pointer]
+    - generic [ref=f1e30]:
+      - generic [ref=f1e31]:
+        - generic [aria-hidden] [ref=f1e32]: ⌕
+        - textbox "Buscar tarefas" [ref=f1e33]:
+          - /placeholder: Buscar tarefas...
+      - combobox "Filtrar tarefas" [ref=f1e34]:
+        - option "Todas" [selected]
+        - option "Pendentes"
+        - option "Concluídas"
+      - button "Limpar concluídas" [ref=f1e35] [cursor=pointer]
+    - generic [ref=f1e36]:
+      - heading "Minhas tarefas" [level=3] [ref=f1e37]
+      - generic [ref=f1e38]: 4 tarefas
+    - list [ref=f1e39]:
+      - listitem [ref=f1e40]:
+        - generic [aria-hidden] [ref=f1e41]: ⠿
+        - checkbox "Marcar Teste avaliação lista como concluída" [checked] [ref=f1e42]: ✓
+        - generic [ref=f1e43]:
+          - generic [ref=f1e44]: Teste avaliação lista
+          - text: Concluída
+        - button "Excluir tarefa" [ref=f1e45] [cursor=pointer]: ×
+      - listitem [ref=f1e46]:
+        - generic [aria-hidden] [ref=f1e47]: ⠿
+        - checkbox "Marcar Planejar as prioridades do dia como concluída" [checked] [ref=f1e48]: ✓
+        - generic [ref=f1e49]:
+          - generic [ref=f1e50]: Planejar as prioridades do dia
+          - text: Concluída
+        - button "Excluir tarefa" [ref=f1e51] [cursor=pointer]: ×
+      - listitem [ref=f1e52]:
+        - generic [aria-hidden] [ref=f1e53]: ⠿
+        - checkbox "Marcar Reservar 30 minutos para estudar como concluída" [ref=f1e54]
+        - generic [ref=f1e55]:
+          - generic [ref=f1e56]: Reservar 30 minutos para estudar
+          - text: Pendente
+        - button "Excluir tarefa" [ref=f1e57] [cursor=pointer]: ×
+      - listitem [ref=f1e58]:
+        - generic [aria-hidden] [ref=f1e59]: ⠿
+        - checkbox "Marcar Beber água e fazer uma pausa como concluída" [ref=f1e60]
+        - generic [ref=f1e61]:
+          - generic [ref=f1e62]: Beber água e fazer uma pausa
+          - text: Pendente
+        - button "Excluir tarefa" [ref=f1e63] [cursor=pointer]: ×
+    - paragraph [ref=f1e64]: "Dica: pressione Enter para adicionar ou arraste ⠿ para reorganizar."
